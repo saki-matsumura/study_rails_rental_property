@@ -10,6 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2023_10_22_031927) do
 
+  create_table "apartments", force: :cascade do |t|
+    t.string "apartment_name"
+    t.integer "rent"
+    t.string "address"
+    t.integer "building_age"
+    t.text "remark"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stations", force: :cascade do |t|
+    t.string "line"
+    t.string "station_name"
+    t.integer "minutes_on_foot"
+    t.integer "apartment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["apartment_id"], name: "index_stations_on_apartment_id"
+  end
+
+  add_foreign_key "stations", "apartments"
 end
