@@ -1,0 +1,49 @@
+<%= form_with(model: @apartment, local: true, url: apartments_path) do |form| %>
+  
+    <% if @apartment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @apartment.errors.count %>件のエラーがあります。</h2>
+        <ul>
+  
+        <% @apartment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+  <h2>物件情報</h2>
+  <%= form.label :apartment_name %>
+  <%= form.text_field :apartment_name %>
+
+  <%= form.label :rent %>
+  <%= form.number_field :rent %>円
+
+  <%= form.label :address %>
+  <%= form.text_field :address %>
+
+  <%= form.label :building_age %>
+  <%= form.number_field :building_age %>年
+
+  <%= form.label :remark %>
+  <%= form.text_field :remark %>
+
+  <hr>
+
+  <%= form.fields_for :stations do | stations_form | %>
+    <h2>最寄駅<%= @station_index += 1 %></h2>
+    <%= stations_form.label :line %>
+    <%= form.text_field :line %>
+
+    <%= stations_form.label :station_name %>
+    <%= form.text_field :station_name %>
+
+    <%= stations_form.label :minutes_on_foot %>
+    <%= form.number_field :minutes_on_foot %>分
+  <% end %>
+
+   <%= form.submit "登録する" %>
+
+<% end %>
+
+<%= link_to "一覧", apartments_path %>
