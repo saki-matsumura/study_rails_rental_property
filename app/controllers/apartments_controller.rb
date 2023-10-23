@@ -1,5 +1,6 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
+  before_action :station_index, only: [:new, :show, :edit]
 
   def index
     @apartments = Apartment.all
@@ -7,7 +8,6 @@ class ApartmentsController < ApplicationController
 
   def new
     @apartment = Apartment.new
-    @station_index = 0
     @submit_text = "登録する"
     2.times { @apartment.stations.build }
   end
@@ -25,7 +25,6 @@ class ApartmentsController < ApplicationController
   end
 
   def edit
-    @station_index = 0
     @submit_text = "更新する"
     @apartment.stations.build
   end
@@ -54,6 +53,7 @@ class ApartmentsController < ApplicationController
     @apartment = Apartment.find(params[:id])
   end
 
-  def set_station
+  def station_index
+    @station_index = 0
   end
 end

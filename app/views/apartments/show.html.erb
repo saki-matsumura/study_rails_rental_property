@@ -1,5 +1,20 @@
-<h1>閲覧</h1>
+<h1>物件情報</h1>
 
-<p>
-<%= link_to "編集", edit_apartment_path %> | <%= link_to "戻る", apartments_path %>
+<p><b>物件名：</b><%= @apartment.apartment_name %></p>
+<p><b>賃料　：</b><%= @apartment.rent %>円</p>
+<p><b>住所　：</b><%= @apartment.address %></p>
+<p><b>築年数：</b><%= @apartment.building_age %>年</p>
+<p><b>備考　：</b><%= @apartment.remark %></p>
+
+<hr>
+
+<% @apartment.stations.each do | stations | %>
+  <h2>最寄駅<%= @station_index += 1 %></h2>
+  <p><b>路線　：</b><%= stations.line %></p>
+  <p><b>駅名　：</b><%= stations.station_name %></p>
+  <p><b>徒歩　：</b><%= stations.minutes_on_foot %>分</p>
+<% end %>
+
+<P>
+<%= link_to "戻る", apartments_path %>
 </p>
