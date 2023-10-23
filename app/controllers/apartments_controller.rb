@@ -8,12 +8,13 @@ class ApartmentsController < ApplicationController
   def new
     @apartment = Apartment.new
     @station_index = 0
+    @submit_text = "登録する"
     2.times { @apartment.stations.build }
   end
 
   def create
     @apartment = Apartment.new(apartment_params)
-    
+    binding.pry
     if @apartment.save
       redirect_to apartments_path, notice: "物件情報を登録しました！"
     else
@@ -25,10 +26,17 @@ class ApartmentsController < ApplicationController
   end
 
   def edit
-    #ここがポイントになる。追加した時にアレをそれするやつ。
+    @station_index = 0
+    @submit_text = "更新する"
+    @apartment.stations.build
   end
 
   def update
+    if @apartment.update(apartment_params)
+      redirect_to apartments_path, notice: "ブログを編集しました！"
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -39,17 +47,8 @@ class ApartmentsController < ApplicationController
   private
 
   def apartment_params
-    params.require(:apartment).permit(:apartment_name,
-                                      :rent,
-                                      :address,
-                                      :building_age,
-                                      :remark)
-  end
-
-  def station_params
-    params.repuire(:station).permit(:line,
-                                    :station_name,
-                                    :minutes_on_foot)
+    params.require(:apartment).permit(:apartment_name, :rent, :address, :building_age, :remark,
+                                      stations_attributes: [:id, :line, :station_name, :minutes_on_foot, :_destroy])
   end
 
   def set_apartment
