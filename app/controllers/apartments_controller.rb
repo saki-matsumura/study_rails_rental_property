@@ -32,7 +32,7 @@ class ApartmentsController < ApplicationController
 
   def update
     if @apartment.update(apartment_params)
-      redirect_to apartments_path, notice: "ブログを編集しました！"
+      redirect_to apartments_path, notice: "物件情報を編集しました！"
     else
       render :edit
     end
