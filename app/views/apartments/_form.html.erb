@@ -33,13 +33,13 @@
   <%= form.fields_for :stations do | stations_form | %>
     <h2>最寄駅<%= @station_index += 1 %></h2>
     <%= stations_form.label :路線 %><br>
-    <%= form.text_field :line %><br>
+    <%= stations_form.text_field :line %><br>
     <br>
     <%= stations_form.label :駅名 %><br>
-    <%= form.text_field :station_name %><br>
+    <%= stations_form.text_field :station_name %><br>
     <br>
     <%= stations_form.label :徒歩 %><br>
-    <%= form.number_field :minutes_on_foot %>分<br>
+    <%= stations_form.number_field :minutes_on_foot %>分<br>
     <br>
   <% end %>
 

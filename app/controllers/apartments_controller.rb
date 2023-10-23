@@ -14,7 +14,6 @@ class ApartmentsController < ApplicationController
 
   def create
     @apartment = Apartment.new(apartment_params)
-    binding.pry
     if @apartment.save
       redirect_to apartments_path, notice: "物件情報を登録しました！"
     else
