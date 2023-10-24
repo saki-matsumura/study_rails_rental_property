@@ -1,0 +1,25 @@
+
+  <ul>
+    <li><b>物件名　：</b><%= @apartment.apartment_name %></li>
+    <li><b>賃料　　：</b><%= @apartment.rent %>円</li>
+    <li><b>住所　　：</b><%= @apartment.address %></li>
+    <li><b>築年数　：</b><%= @apartment.building_age %>年</li>
+    <li><b>備考　　：</b><%= @apartment.remark %></li>
+  </ul>
+
+
+<hr>
+
+<% @apartment.stations.each do | stations | %>
+  <b>最寄り駅<%= @station_index += 1 %></b>
+  <ul>
+    <li><b>路線名　：</b><%= stations.line %></li>
+    <li><b>駅名　　：</b><%= stations.station_name %></li>
+    <li><b>徒歩分数：</b><%= stations.minutes_on_foot %>分</li>
+  </ul>
+
+<% end %>
+
+<P>
+<%= link_to "編集", edit_apartment_path %> | <%= link_to "戻る", apartments_path %>
+</p>
